@@ -1,1 +1,410 @@
-c
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Nest Home | Premium Catalog</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Inter (Modern, Clean Sans-serif) & Playfair Display (Elegant Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            base: '#FFFFFF',      /* Nền trắng */
+                            card: '#F4EFEA',      /* Màu Kem Sữa đúng chuẩn ảnh gốc */
+                            text: '#4A4238',      /* Nâu xám đậm - Dịu mắt hơn màu đen */
+                            muted: '#8C8275',     /* Nâu nhạt cho text phụ */
+                            accent: '#6E6259'     /* Nâu trung tính cho các icon */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            background-color: #E8E8E8; /* Màu nền desktop xám nhạt để tách biệt điện thoại */
+            color: #4A4238; 
+            -webkit-font-smoothing: antialiased; 
+        }
+        
+        .app-container {
+            max-width: 480px; 
+            margin: 0 auto; 
+            background-color: #FFFFFF;
+            min-height: 100vh; 
+            position: relative; 
+            box-shadow: 0 0 40px rgba(0,0,0,0.05);
+            overflow-x: hidden;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Custom Heart Bullet matching original design */
+        .feature-bullet { 
+            position: relative; 
+            padding-left: 20px; 
+        }
+        .feature-bullet::before {
+            content: '\f004'; 
+            font-family: 'Font Awesome 6 Free'; 
+            font-weight: 900;
+            color: #5C544A; /* Màu trái tim nâu xám */
+            position: absolute; 
+            left: 0; 
+            top: 2px; 
+            font-size: 11px;
+        }
+
+        /* Nút Tab Cuộn ngang */
+        .snap-x-mandatory { scroll-snap-type: x mandatory; }
+        .snap-center { scroll-snap-align: center; }
+
+        /* Cấu trúc Lightbox */
+        .lightbox {
+            position: fixed; inset: 0; background: rgba(255,255,255,0.98); z-index: 2000;
+            display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active { opacity: 1; pointer-events: auto; }
+        .lightbox img { max-width: 100%; max-height: 80vh; border-radius: 12px; transform: scale(0.95); transition: transform 0.3s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .lightbox.active img { transform: scale(1); }
+    </style>
+</head>
+<body>
+
+    <!-- Lightbox Xem Ảnh -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-brand-text text-2xl w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition-all">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Zoomed">
+    </div>
+
+    <div class="app-container pb-28">
+        
+        <!-- HEADER -->
+        <header class="flex justify-between items-center p-5">
+            <button class="bg-gray-100 hover:bg-gray-200 text-brand-text text-[10px] font-bold px-4 py-2 rounded-full transition-colors flex items-center gap-2">
+                <i class="fa-regular fa-bell"></i> SUBSCRIBE
+            </button>
+            <button class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-brand-text transition-colors">
+                <i class="fa-solid fa-share-nodes text-sm"></i>
+            </button>
+        </header>
+
+        <!-- PROFILE SECTION -->
+        <section class="flex flex-col items-center px-5 pb-6">
+            <!-- Logo Box chuẩn vuông vắn -->
+            <div class="w-24 h-24 bg-white border border-gray-200 rounded-xl flex items-center justify-center mb-4 p-2 shadow-sm">
+                <div class="w-full h-full border border-gray-100 flex flex-col items-center justify-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-1 text-brand-text"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    <span class="text-[8px] font-extrabold tracking-widest uppercase text-brand-text mt-1">The Nest</span>
+                </div>
+            </div>
+            
+            <h1 class="text-xl font-bold uppercase tracking-widest mb-1 text-brand-text">THE NEST HOME</h1>
+            <p class="text-sm font-semibold mb-5 text-brand-text">Hotline: <span class="font-bold">0912.345.678</span></p>
+            
+            <!-- Social Icons (Tối giản đen trắng - Đã gắn Link Demo) -->
+            <div class="flex gap-4">
+                <a href="https://www.tiktok.com" target="_blank" class="w-10 h-10 bg-brand-text text-white rounded-full flex items-center justify-center text-lg hover:opacity-80 transition-opacity">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="w-10 h-10 bg-brand-text text-white rounded-full flex items-center justify-center text-lg hover:opacity-80 transition-opacity">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com" target="_blank" class="w-10 h-10 bg-brand-text text-white rounded-full flex items-center justify-center text-lg hover:opacity-80 transition-opacity">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- ĐƯỜNG GẠCH NGANG MẢNH -->
+        <div class="px-8 mb-6"><div class="w-full h-[1px] bg-gray-200"></div></div>
+
+        <!-- STICKY MENU (Nút bấm tròn trịa, màu kem nhạt) -->
+        <div class="sticky top-0 z-40 bg-white/90 backdrop-blur-md px-5 py-3 border-b border-gray-100 flex gap-3 overflow-x-auto hide-scrollbar snap-x-mandatory">
+            <a href="#branch1" class="tab-link snap-center shrink-0 px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all bg-brand-card text-brand-text">Chi nhánh 1</a>
+            <a href="#branch2" class="tab-link snap-center shrink-0 px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all bg-transparent text-brand-muted hover:bg-gray-50">Chi nhánh 2</a>
+            <a href="#branch3" class="tab-link snap-center shrink-0 px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all bg-transparent text-brand-muted hover:bg-gray-50">Chi nhánh 3</a>
+            <a href="#branch5" class="tab-link snap-center shrink-0 px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all bg-transparent text-brand-muted hover:bg-gray-50">Chi nhánh 5</a>
+        </div>
+
+        <!-- ================= CHI NHÁNH 1 ================= -->
+        <div id="branch1" class="pt-8 pb-4 scroll-mt-[60px] section-spy">
+            <div class="text-center mb-4">
+                <h2 class="text-[15px] font-bold uppercase tracking-widest text-brand-text">THE NEST HOME 1</h2>
+                <p class="text-[12px] font-medium text-brand-text mt-1">V9 Ba Vì, P. Hoà Hưng, TP. Hồ Chí Minh</p>
+            </div>
+
+            <section class="px-4">
+                <div class="bg-brand-card rounded-[2rem] pt-6 pb-2 px-4 relative">
+                    
+                    <!-- Badge Phòng nằm góc phải -->
+                    <div class="absolute -top-3 right-4 bg-white px-5 py-2.5 rounded-full shadow-sm text-center">
+                        <div class="text-[13px] font-bold text-brand-text leading-tight">ROOM G01 - Bồn tắm</div>
+                        <div class="text-[10px] font-bold text-brand-muted uppercase tracking-widest">(SIGNATURE)</div>
+                    </div>
+
+                    <!-- Header trong Card -->
+                    <div class="mb-5 max-w-[65%]">
+                        <h3 class="font-serif italic text-[22px] text-brand-muted mb-1 leading-none">The Nest Home 1</h3>
+                        <p class="text-[9px] font-medium text-brand-muted italic uppercase leading-relaxed">V9 Đ. Ba Vì, Phường 15, Quận 10, TP. HCM</p>
+                        <p class="text-[10px] font-bold mt-1 text-brand-text">Hotline: 0912 345 678</p>
+                    </div>
+
+                    <!-- Bento Images -->
+                    <div class="grid grid-cols-2 gap-2.5 mb-6">
+                        <div class="aspect-[4/5] rounded-[1.25rem] overflow-hidden bg-gray-200 cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="aspect-[4/5] rounded-[1.25rem] overflow-hidden bg-gray-200 cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="col-span-2 aspect-[16/10] rounded-[1.25rem] overflow-hidden bg-gray-200 cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="mb-6 px-1">
+                        <ul class="space-y-1.5">
+                            <li class="feature-bullet text-[12px] font-semibold text-brand-text leading-snug">Không gian lãng mạn với các chi tiết trang trí tinh tế làm điểm nhấn.</li>
+                            <li class="feature-bullet text-[12px] font-semibold text-brand-text leading-snug">Phòng được trang bị máy chiếu HD tích hợp WiFi, Netflix, Youtube Premium.</li>
+                            <li class="feature-bullet text-[12px] font-semibold text-brand-text leading-snug">Miễn phí 2 chai nước suối và "đồ bảo hộ" cho cuộc yêu.</li>
+                            <li class="feature-bullet text-[12px] font-semibold text-brand-text leading-snug">Phòng phù hợp cho 2 người lớn.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Amenities Bar (Icon hàng ngang) -->
+                    <div class="flex justify-between items-start pt-4 border-t border-brand-muted/20 pb-2 px-1">
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-couch text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">Sofa</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-bath text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">Bathtub</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-bed text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">1m6x2m</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-wifi text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent text-center leading-none">Wifi<br>Netflix</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-shield-heart text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent text-center leading-none">Love<br>Shield</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= CHI NHÁNH 2 ================= -->
+        <div id="branch2" class="pt-8 pb-4 scroll-mt-[60px] section-spy">
+            <div class="text-center mb-4">
+                <h2 class="text-[15px] font-bold uppercase tracking-widest text-brand-text">THE NEST HOME 2</h2>
+                <p class="text-[12px] font-medium text-brand-text mt-1">824/4 Sư Vạn Hạnh, P. Hoà Hưng, TP. HCM</p>
+            </div>
+
+            <section class="px-4">
+                <div class="bg-brand-card rounded-[2rem] pt-6 pb-2 px-4 relative">
+                    
+                    <div class="absolute -top-3 right-4 bg-white px-5 py-2.5 rounded-full shadow-sm text-center">
+                        <div class="text-[13px] font-bold text-brand-text leading-tight">ROOM 201 - Bồn tắm</div>
+                        <div class="text-[10px] font-bold text-brand-muted uppercase tracking-widest">(SIGNATURE)</div>
+                    </div>
+
+                    <div class="mb-5 max-w-[65%]">
+                        <h3 class="font-serif italic text-[22px] text-brand-muted mb-1 leading-none">The Nest Home 2</h3>
+                        <p class="text-[9px] font-medium text-brand-muted italic uppercase leading-relaxed">824/4 Sư Vạn Hạnh, Phường 12, Quận 10, TP.HCM</p>
+                        <p class="text-[10px] font-bold mt-1 text-brand-text">Hotline: 0912 345 678</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5 mb-6">
+                        <div class="aspect-[4/5] rounded-[1.25rem] overflow-hidden bg-gray-200 cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="aspect-[4/5] rounded-[1.25rem] overflow-hidden bg-gray-200 cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=600&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="col-span-2 aspect-[16/10] rounded-[1.25rem] overflow-hidden bg-gray-200 cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                    </div>
+
+                    <div class="mb-6 px-1">
+                        <ul class="space-y-1.5">
+                            <li class="feature-bullet text-[12px] font-semibold text-brand-text leading-snug">Cách trang trí hiện đại, tạo nên không gian sang trọng và nghệ thuật.</li>
+                            <li class="feature-bullet text-[12px] font-semibold text-brand-text leading-snug">Phòng được trang bị máy chiếu HD tích hợp WiFi, Netflix, Youtube Premium.</li>
+                            <li class="feature-bullet text-[12px] font-semibold text-brand-text leading-snug">Miễn phí 2 chai nước suối và "đồ bảo hộ" cho cuộc yêu.</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between items-start pt-4 border-t border-brand-muted/20 pb-2 px-1">
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-sink text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">Kitchen</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-couch text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">Sofa</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-bath text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">Bathtub</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-bed text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">1m6x2m</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-wifi text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent text-center leading-none">Wifi<br>Netflix</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- ================= CHI NHÁNH 3 ================= -->
+        <div id="branch3" class="pt-8 pb-4 scroll-mt-[60px] section-spy">
+            <div class="text-center mb-4">
+                <h2 class="text-[15px] font-bold uppercase tracking-widest text-brand-text">THE NEST HOME 3</h2>
+                <p class="text-[12px] font-medium text-brand-text mt-1">9 Huỳnh Khương Ninh, P. Tân Định, TP. HCM</p>
+            </div>
+
+            <section class="px-4">
+                <div class="bg-brand-card rounded-[2rem] pt-6 pb-2 px-4 relative">
+                    
+                    <div class="absolute -top-3 right-4 bg-white px-5 py-2.5 rounded-full shadow-sm text-center">
+                        <div class="text-[13px] font-bold text-brand-text leading-tight">ROOM G01 - Bồn tắm</div>
+                        <div class="text-[10px] font-bold text-brand-muted uppercase tracking-widest">(PREMIUM)</div>
+                    </div>
+
+                    <div class="mb-5 max-w-[65%]">
+                        <h3 class="font-serif italic text-[22px] text-brand-muted mb-1 leading-none">The Nest Home 3</h3>
+                        <p class="text-[9px] font-medium text-brand-muted italic uppercase leading-relaxed">9 Huỳnh Khương Ninh, Đa Kao, Quận 1, TP.HCM</p>
+                        <p class="text-[10px] font-bold mt-1 text-brand-text">Hotline: 0912 345 678</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5 mb-6">
+                        <div class="aspect-[4/5] rounded-[1.25rem] overflow-hidden bg-gray-200 cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="https://images.unsplash.com/photo-1598928506311-c55dd1b4802c?w=600&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="aspect-[4/5] rounded-[1.25rem] overflow-hidden bg-gray-200 cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="https://images.unsplash.com/photo-1583847268964-b28ce8f30f6c?w=600&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="col-span-2 aspect-[16/10] rounded-[1.25rem] overflow-hidden bg-gray-200 cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                    </div>
+
+                    <div class="mb-6 px-1">
+                        <ul class="space-y-1.5">
+                            <li class="feature-bullet text-[12px] font-semibold text-brand-text leading-snug">Thiết kế Minimalist cùng tone màu kem nhẹ nhàng, tinh tế.</li>
+                            <li class="feature-bullet text-[12px] font-semibold text-brand-text leading-snug">Phòng được trang bị máy chiếu HD tích hợp WiFi, Netflix, Youtube Premium.</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between items-start pt-4 border-t border-brand-muted/20 pb-2 px-1">
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-sink text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">Kitchen</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-couch text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">Sofa</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-bath text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">Bathtub</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-bed text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent">1m6x2m</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 w-1/5">
+                            <i class="fa-solid fa-wifi text-brand-accent text-lg"></i>
+                            <span class="text-[8px] font-bold uppercase text-brand-accent text-center leading-none">Wifi<br>Netflix</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FLOATING BOTTOM BUTTON (Màu Nâu xám tinh tế) -->
+        <div class="fixed bottom-0 left-0 right-0 max-w-[480px] mx-auto z-50 px-5 pb-6 pt-12 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none">
+            <!-- Đã gắn link Zalo tự động nhận diện số điện thoại mới -->
+            <button onclick="window.open('https://zalo.me/0912345678', '_blank')" class="pointer-events-auto w-full bg-[#4A4238] text-white py-4 rounded-[1.5rem] text-center flex items-center justify-center gap-2 shadow-lg hover:bg-[#3d362e] transition-colors">
+                <i class="fa-regular fa-calendar-check text-lg mb-0.5"></i>
+                <span class="font-bold text-[14px] tracking-widest uppercase">Đặt phòng ngay</span>
+            </button>
+        </div>
+        
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Zoom Ảnh Tối Giản
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            document.getElementById('lightbox-img').src = imgSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = ''; 
+            setTimeout(() => { document.getElementById('lightbox-img').src = ''; }, 300);
+        }
+
+        // Tự động chuyển màu Menu Tab khi lướt (Scroll Spy)
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section-spy');
+            const navLinks = document.querySelectorAll('.tab-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) { current = section.getAttribute('id'); }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('bg-brand-card', 'text-brand-text');
+                    link.classList.add('bg-transparent', 'text-brand-muted');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.remove('bg-transparent', 'text-brand-muted');
+                        link.classList.add('bg-brand-card', 'text-brand-text');
+                        link.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
